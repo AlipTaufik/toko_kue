@@ -2,28 +2,36 @@
 // ignore_for_file: type=lint
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cakery_shop_ui/widget/navbar_widget_drink.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import 'package:flutter_cakery_shop_ui/data/drink.dart';
+import 'package:flutter_cakery_shop_ui/screen/cart_provider.dart';
 import 'package:flutter_cakery_shop_ui/widget/navbar_widget.dart';
 
 class DrinkDetail extends StatelessWidget {
   final String pat;
+  final Drink drink;
   final String assetPath;
   final String drinkprice;
   final String drinkname;
   const DrinkDetail({
-    Key? key, 
-   required this.assetPath,
-   required this.drinkprice,
-   required this.drinkname,
-   required this.pat}) : super (key: key);
+    Key? key,
+    required this.pat,
+    required this.drink,
+    required this.assetPath,
+    required this.drinkprice,
+    required this.drinkname,
+  }) : super (key: key);
+   
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -181,12 +189,19 @@ class DrinkDetail extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          cartProvider.addDrinkToCart(drink);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: Duration(seconds: 1),
+                  backgroundColor: Colors.blue,
+                  content: Text('${drinkname} telah ditambahkan ke keranjang!'),
+                ));
+        },
         backgroundColor: const Color(0xFFF17532),
         child: const Icon(Icons.fastfood),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const NavbarWidget(),
+      bottomNavigationBar: const NavbarWidgetDrink(),
     );
   }
 }
@@ -384,7 +399,8 @@ Widget _buildCard(Drink drink, context) {
             assetPath: drink.imageUrl,
             drinkprice: drink.price,
             drinkname: drink.name,
-            pat: drink.deskripsi,);
+            pat: drink.deskripsi,
+            drink: drink,);
       }
     },);
   }

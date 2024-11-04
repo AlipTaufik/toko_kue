@@ -4,6 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_cakery_shop_ui/screen/cart_provider.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_cakery_shop_ui/data/cake.dart';
@@ -11,8 +12,8 @@ import 'package:flutter_cakery_shop_ui/screen/cart_view.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges_pkg;
 
-class NavbarWidget extends StatelessWidget {
-  const NavbarWidget({Key? key}) : super(key: key);
+class NavbarWidgetDrink extends StatelessWidget {
+  const NavbarWidgetDrink({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +61,13 @@ class NavbarWidget extends StatelessWidget {
                   Consumer<CartProvider>(
                     builder: (_, cartProvider, __) => badges_pkg.Badge(
                       badgeContent: Text(
-                        cartProvider.itemCount.toString(),
+                        cartProvider.drinkCount.toString(),
                         style: TextStyle(color: Colors.white),
                       ),
-                      showBadge: cartProvider.itemCount > 0,
+                      showBadge: cartProvider.drinkCount > 0,
                       position: BadgePosition.topEnd(top: 0, end: 3),
                       child: IconButton(
-                        icon: Icon(Icons.shopping_basket_outlined),
+                        icon: Icon(Icons.add_shopping_cart_rounded),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => CartScreen(),

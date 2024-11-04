@@ -240,3 +240,158 @@ class _HomeWebState extends State<HomeWeb> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+
+// Hasil Penyerderhanaan dari chatGpt ini sebagai contoh
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_cakery_shop_ui/screen/cakery_page.dart';
+// import 'package:flutter_cakery_shop_ui/screen/drink_page.dart';
+// import 'package:flutter_cakery_shop_ui/widget/navbar_widget.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// class MainWidget extends StatelessWidget {
+//   const MainWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return LayoutBuilder(
+//       builder: (BuildContext context, BoxConstraints constraints) {
+//         if (constraints.maxWidth <= 500) {
+//           return const Home(isMobile: true);
+//         } else {
+//           return const Home(isMobile: false);
+//         }
+//       },
+//     );
+//   }
+// }
+
+// class Home extends StatefulWidget {
+//   final bool isMobile;
+//   const Home({super.key, required this.isMobile});
+
+//   @override
+//   State<Home> createState() => _HomeState();
+// }
+
+// class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+//   late TabController _tabController;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _tabController = TabController(length: 2, vsync: this);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: _buildAppBar(context),
+//       body: ListView(
+//         padding: EdgeInsets.symmetric(horizontal: widget.isMobile ? 16.sp : 8.sp),
+//         children: [
+//           SizedBox(height: 2.0.h),
+//           Text(
+//             'Menu',
+//             style: TextStyle(
+//               fontFamily: 'Varela',
+//               fontSize: widget.isMobile ? 12.0.sp : 5.0.sp,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//           SizedBox(height: 4.0.h),
+//           _buildTabBar(),
+//           _buildTabBarView(context),
+//         ],
+//       ),
+//       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: () {},
+//         backgroundColor: widget.isMobile
+//             ? const Color(0xFFF17532)
+//             : const Color.fromARGB(255, 235, 210, 196),
+//         child: const Icon(Icons.fastfood),
+//       ),
+//       bottomNavigationBar: const NavbarWidget(),
+//     );
+//   }
+
+//   AppBar _buildAppBar(BuildContext context) {
+//     return AppBar(
+//       backgroundColor: Colors.white,
+//       elevation: 0.0,
+//       centerTitle: true,
+//       leading: IconButton(
+//         icon: const Icon(
+//           Icons.arrow_back,
+//           color: Color(0xFF545D68),
+//         ),
+//         onPressed: () {},
+//       ),
+//       title: Text(
+//         'Levineszz size: ${MediaQuery.of(context).size.width}',
+//         style: TextStyle(
+//           fontFamily: 'Varela',
+//           fontSize: widget.isMobile ? 10.0.sp : 12.0.sp,
+//           color: const Color(0xFF545D68),
+//         ),
+//       ),
+//       actions: [
+//         IconButton(
+//           icon: const Icon(
+//             Icons.notifications_none,
+//             color: Color(0xFF545D68),
+//           ),
+//           onPressed: () {},
+//         ),
+//       ],
+//     );
+//   }
+
+//   Widget _buildTabBar() {
+//     return TabBar(
+//       controller: _tabController,
+//       indicatorColor: Colors.transparent,
+//       labelColor: const Color(0xFFC88D67),
+//       isScrollable: true,
+//       labelPadding: const EdgeInsets.only(right: 24),
+//       unselectedLabelColor: const Color(0xFFCDCDCD),
+//       tabs: [
+//         Tab(
+//           child: Text(
+//             'Cake Box',
+//             style: TextStyle(
+//               fontFamily: 'Varela',
+//               fontSize: widget.isMobile ? 20.0.sp : 10.0.sp,
+//             ),
+//           ),
+//         ),
+//         Tab(
+//           child: Text(
+//             'Drink',
+//             style: TextStyle(
+//               fontFamily: 'Varela',
+//               fontSize: widget.isMobile ? 20.0.sp : 10.0.sp,
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+
+//   Widget _buildTabBarView(BuildContext context) {
+//     return SizedBox(
+//       height: MediaQuery.of(context).size.height - (widget.isMobile ? 160.0.h : 120.0.h),
+//       width: double.infinity,
+//       child: TabBarView(
+//         controller: _tabController,
+//         children: const [
+//           CakeryPage(),
+//           DrinkPage(),
+//         ],
+//       ),
+//     );
+//   }
+// }
+

@@ -1,9 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_cakery_shop_ui/data/cake.dart';
+
+import 'package:flutter_cakery_shop_ui/screen/cart_provider.dart';
 import 'package:flutter_cakery_shop_ui/widget/navbar_widget.dart';
-import 'package:flutter_launch/flutter_launch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -11,16 +14,20 @@ class CakeryDetail extends StatelessWidget {
   final String assetPath;
   final String cookieprice;
   final String cookiename;
+  final Cake cake;
 
   const CakeryDetail({
     Key? key,
     required this.assetPath,
     required this.cookieprice,
     required this.cookiename,
+    required this.cake,
   }) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -178,9 +185,16 @@ class CakeryDetail extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFFF17532),
-        child: const Icon(Icons.fastfood),
+        onPressed: () {
+          cartProvider.addProductToCart(cake);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: Colors.blue,
+                  content: Text('${cake.name} telah ditambahkan ke keranjang!'),
+                ));
+        },
+        backgroundColor: const Color.fromARGB(255, 50, 117, 241),
+        child: const Icon(Icons.shopping_cart),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const NavbarWidget(),
@@ -354,9 +368,12 @@ class CakeryDetailWeb extends StatelessWidget {
           ),
           SizedBox(height: 28.0.h),
         ],
+
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          
+        },
         backgroundColor: const Color(0xFFF17532),
         child: const Icon(Icons.fastfood),
       ),
@@ -377,7 +394,8 @@ Widget _buildCard(Cake cake, context) {
         return CakeryDetail(
             assetPath: cake.imageUrl,
             cookieprice: cake.price,
-            cookiename: cake.name,);
+            cookiename: cake.name,
+            cake: cake,);
       }
     },);
   }
@@ -393,3 +411,57 @@ class Mainwidget extends StatelessWidget {
     return _buildCard(cake, context);
   }
 }
+
+// class ProductDetailScreen extends StatelessWidget {
+//   final Cake cake;
+
+//   const ProductDetailScreen(this.cake, {super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final cartProvider = Provider.of<CartProvider>(context);
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(cake.name),
+//         actions: [
+//           Consumer<CartProvider>(
+//             builder: (_, cartProvider, __) => badges_pkg.Badge(
+//               badgeContent: Text(
+//                 cartProvider.itemCount.toString(),
+//                 style: TextStyle(color: Colors.white),
+//               ),
+//               showBadge: cartProvider.itemCount > 0,
+//               position: BadgePosition.topEnd(top: 0, end: 3),
+//               child: IconButton(
+//                 icon: Icon(Icons.shopping_basket_outlined),
+//                 onPressed: () {
+//                   Navigator.of(context).push(MaterialPageRoute(
+//                     builder: (_) => CartScreen(),
+//                   ));
+//                 },
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             ElevatedButton(
+//               onPressed: () {
+//                 cartProvider.addProductToCart(cake);
+//                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                   content: Text('${cake.name} telah ditambahkan ke keranjang!'),
+//                 ));
+//               },
+//               child: Text('sadsa'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
