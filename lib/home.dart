@@ -56,7 +56,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           onPressed: () {},
         ),
         title: Text(
-          'Levineszz size: ${MediaQuery.of(context).size.width}',
+          'Levinesz Cakery',
           style: TextStyle(
             fontFamily: 'Varela',
             fontSize: 10.0.sp,
@@ -162,7 +162,7 @@ class _HomeWebState extends State<HomeWeb> with SingleTickerProviderStateMixin {
           onPressed: () {},
         ),
         title: Text(
-          'Levine size: ${MediaQuery.of(context).size.width}',
+          'Levinesz Cakery',
           style: TextStyle(
             fontFamily: 'Varela',
             fontSize: 12.0.sp,

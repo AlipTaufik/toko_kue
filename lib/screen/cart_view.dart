@@ -146,14 +146,16 @@ void _printCheckout(BuildContext context, CartProvider cartProvider) {
                     title: Text(item.name),
                     subtitle: Text("Jumlah: ${item.quantity}"),
                     trailing: Text(
-                        "Rp ${(item.quantity * double.parse(item.price)).toStringAsFixed(3)}"),
+                        "Rp ${(item.quantity * double.parse(item.price)).toStringAsFixed(3)}",
+                        style: const TextStyle(fontSize: 14)),
                   );
                 } else if (item is Drink) {
                   return ListTile(
                     title: Text(item.name),
                     subtitle: Text("Jumlah: ${item.quantity}"),
                     trailing: Text(
-                        "Rp ${(item.quantity * double.parse(item.price)).toStringAsFixed(3)}"),
+                        "Rp ${(item.quantity * double.parse(item.price)).toStringAsFixed(3)}",
+                        style: const TextStyle(fontSize: 14)),
                   );
                 } else {
                   return SizedBox();
